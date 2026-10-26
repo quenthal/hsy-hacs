@@ -70,6 +70,10 @@ lukema syötetään *Lähetettävä lukema* -entiteettiin.
 Asennus HACS:n custom repositoryna, minkä jälkeen *Asetukset → Laitteet ja
 palvelut → Lisää integraatio → HSY*.
 
+## License
+
+MIT, see [LICENSE](LICENSE). The license covers the code only, not the HSY name or logo.
+
 ## Disclaimer
 
 This is an unofficial integration and is not affiliated with, endorsed by or
