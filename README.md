@@ -6,6 +6,11 @@ Custom integration for [HSY](https://www.hsy.fi/) (Helsinki Region Environmental
 Services) customers. It reads your water and waste data from HSY eRaportti and
 can submit your water meter reading to HSY automatically once a month.
 
+> **Unofficial.** This is a community project with no affiliation, partnership
+> or endorsement by HSY. Using the HSY name and logo does not imply any
+> official relationship. HSY does not support this integration; please report
+> issues here, not to HSY.
+
 *Suomeksi alla.*
 
 ## Features
@@ -51,6 +56,11 @@ Assistant configuration and are redacted from diagnostics.
 
 ## Suomeksi
 
+> **Epävirallinen.** Tämä on yhteisöprojekti, eikä sillä ole mitään virallista
+> yhteyttä, yhteistyötä tai hyväksyntää HSY:n kanssa. HSY:n nimen ja logon
+> käyttö ei tarkoita virallista suhdetta. HSY ei tue tätä integraatiota;
+> ilmoita ongelmista tämän repon kautta, älä HSY:lle.
+
 HSY:n eRaportin vesi- ja jätetiedot Home Assistantiin: vesimittarin lukema,
 vedenkulutus ja -kustannukset, kerätyt jätteet ja jätekustannukset sekä
 jäteastioiden seuraavat noudot. Valinnaisesti integraatio lähettää
@@ -62,5 +72,8 @@ palvelut → Lisää integraatio → HSY*.
 
 ## Disclaimer
 
-This is an unofficial integration and is not affiliated with or endorsed by HSY.
-The HSY name and logo are trademarks of HSY and are used only to identify the service.
+This is an unofficial integration and is not affiliated with, endorsed by or
+supported by HSY (Helsingin seudun ympäristöpalvelut -kuntayhtymä). The HSY
+name and logo, including the integration icon, are trademarks of HSY and are
+used only to identify the service the integration connects to. They do not
+indicate any official relationship. If HSY asks, the icon will be removed.
