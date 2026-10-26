@@ -20,7 +20,9 @@ can submit your water meter reading to HSY automatically once a month.
 - Waste collected and waste costs for the current year, in total and per fraction
 - Next collection date for every waste container (mixed, bio, cardboard, …)
 - Optional monthly automatic submission of the water meter reading, with:
-  - a number entity for the reading to submit
+  - a number entity for the reading to submit, either entered by hand or
+    following a sensor (e.g. a camera-read meter), rounded down to an integer
+  - buttons and the `hsy.submit_reading` action for submitting now or as a dry run
   - "reading submitted this month" binary sensor and submission result sensor
   - protection against submitting a reading lower than the previous one
   - no hourly retries after HSY has refused a reading; a new reading is tried again
@@ -42,10 +44,33 @@ relative, e.g. "in 3 days".
    Leave everything empty to use only the sensors. You can change this later
    with *Reconfigure*.
 
-Options: update interval (default 24 h) and the automatic submission schedule
-(off by default; days 1–6 of the month, 8–23 o'clock). The automatic submission
-sends the value of the *Meter reading to submit* entity, so update it e.g. from
-an automation or manually before the window.
+Options: update interval (default 24 h), reading source entity and the
+automatic submission schedule (off by default; days 1–6 of the month,
+8–23 o'clock). The automatic submission sends the value of the *Meter reading
+to submit* entity.
+
+### Reading source
+
+Select a sensor as the *reading source* in the options, and the reading to
+submit follows it automatically, e.g. a validated meter sensor read by a
+camera ([AI-on-the-edge-device](https://github.com/jomjol/AI-on-the-edge-device)).
+No automation is needed. Without a source, set the reading by hand or with
+`number.set_value`.
+
+### Submitting now
+
+The *Submit reading to HSY* and *Submit reading (dry run)* buttons send the
+current reading. The `hsy.submit_reading` action does the same from scripts and
+automations, optionally with a given `reading` and `dry_run: true`, and returns
+the result:
+
+```yaml
+action: hsy.submit_reading
+data:
+  config_entry_id: <your HSY entry>
+  dry_run: true
+response_variable: result
+```
 
 ## Privacy
 
@@ -65,7 +90,9 @@ HSY:n eRaportin vesi- ja jätetiedot Home Assistantiin: vesimittarin lukema,
 vedenkulutus ja -kustannukset, kerätyt jätteet ja jätekustannukset sekä
 jäteastioiden seuraavat noudot. Valinnaisesti integraatio lähettää
 vesimittarin lukeman HSY:lle automaattisesti kerran kuussa. Lähetettävä
-lukema syötetään *Lähetettävä lukema* -entiteettiin.
+lukema syötetään *Lähetettävä lukema* -entiteettiin tai se seuraa valittua
+sensoria (esim. kameralla luettu mittari). Lukeman voi lähettää myös heti
+napeilla tai `hsy.submit_reading`-toiminnolla, myös kuivaharjoituksena.
 
 Asennus HACS:n custom repositoryna, minkä jälkeen *Asetukset → Laitteet ja
 palvelut → Lisää integraatio → HSY*.

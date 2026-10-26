@@ -31,6 +31,7 @@ CONF_AUTO_SUBMIT: Final = "auto_submit"
 CONF_AUTO_DAYS: Final = "auto_submit_days"
 CONF_AUTO_HOUR_START: Final = "auto_submit_hour_start"
 CONF_AUTO_HOUR_END: Final = "auto_submit_hour_end"
+CONF_READING_SOURCE: Final = "reading_source"
 
 DEFAULT_UPDATE_INTERVAL: Final = 24
 DEFAULT_AUTO_SUBMIT: Final = False
@@ -43,6 +44,11 @@ SUBMIT_ATTEMPTS: Final = 3
 SUBMIT_RETRY_DELAY: Final = timedelta(seconds=60)
 
 STORAGE_VERSION: Final = 1
+
+SERVICE_SUBMIT_READING: Final = "submit_reading"
+ATTR_CONFIG_ENTRY_ID: Final = "config_entry_id"
+ATTR_READING: Final = "reading"
+ATTR_DRY_RUN: Final = "dry_run"
 
 # Dates from eRaportti are shown as timestamps at this local hour, so that
 # the frontend renders them relative ("in 3 days").

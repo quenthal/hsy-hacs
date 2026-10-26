@@ -10,6 +10,8 @@ from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.selector import (
     BooleanSelector,
+    EntitySelector,
+    EntitySelectorConfig,
     NumberSelector,
     NumberSelectorConfig,
     NumberSelectorMode,
@@ -33,6 +35,7 @@ from .const import (
     CONF_CONTRACT_NUMBER,
     CONF_CUSTOMER_NUMBER,
     CONF_METER_NUMBER,
+    CONF_READING_SOURCE,
     CONF_UPDATE_INTERVAL,
     CONF_WASTE_SERVICE_NUMBER,
     CONF_WATER_SERVICE_NUMBER,
@@ -242,6 +245,9 @@ class HSYOptionsFlow(OptionsFlow):
                         mode=NumberSelectorMode.BOX,
                         unit_of_measurement="h",
                     )
+                ),
+                vol.Optional(CONF_READING_SOURCE): EntitySelector(
+                    EntitySelectorConfig(domain=["sensor", "number", "input_number"])
                 ),
                 vol.Required(CONF_AUTO_SUBMIT): BooleanSelector(),
                 vol.Required(CONF_AUTO_DAYS): SelectSelector(

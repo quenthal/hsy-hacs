@@ -1,0 +1,18 @@
+submit_reading:
+  fields:
+    config_entry_id:
+      required: true
+      selector:
+        config_entry:
+          integration: hsy
+    reading:
+      selector:
+        number:
+          min: 1
+          max: 999999
+          mode: box
+          unit_of_measurement: "m³"
+    dry_run:
+      default: false
+      selector:
+        boolean:

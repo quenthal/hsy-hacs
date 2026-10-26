@@ -7,14 +7,29 @@ from dataclasses import dataclass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.typing import ConfigType
 
 from .api import HSYApiClient
-from .const import CONF_WASTE_SERVICE_NUMBER, CONF_WATER_SERVICE_NUMBER, SUBMIT_KEYS
+from .const import (
+    CONF_WASTE_SERVICE_NUMBER,
+    CONF_WATER_SERVICE_NUMBER,
+    DOMAIN,
+    SUBMIT_KEYS,
+)
 from .coordinator import HSYCoordinator
+from .services import async_setup_services
 from .submit import HSYSubmitManager
 
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.NUMBER, Platform.SENSOR]
+PLATFORMS = [
+    Platform.BINARY_SENSOR,
+    Platform.BUTTON,
+    Platform.NUMBER,
+    Platform.SENSOR,
+]
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 
 
 @dataclass
@@ -31,6 +46,12 @@ type HSYConfigEntry = ConfigEntry[HSYRuntimeData]
 def has_submit_credentials(data: dict) -> bool:
     """Return True when all reading submission settings are present."""
     return all(data.get(key) for key in SUBMIT_KEYS)
+
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Register the integration services."""
+    async_setup_services(hass)
+    return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: HSYConfigEntry) -> bool:

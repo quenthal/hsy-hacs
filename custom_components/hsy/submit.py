@@ -9,8 +9,19 @@ from enum import StrEnum
 import logging
 from typing import TYPE_CHECKING, Any
 
-from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
-from homeassistant.helpers.event import async_track_time_change
+from homeassistant.const import STATE_UNAVAILABLE, STATE_UNKNOWN
+from homeassistant.core import (
+    CALLBACK_TYPE,
+    Event,
+    EventStateChangedData,
+    HomeAssistant,
+    State,
+    callback,
+)
+from homeassistant.helpers.event import (
+    async_track_state_change_event,
+    async_track_time_change,
+)
 from homeassistant.helpers.storage import Store
 from homeassistant.util import dt as dt_util
 
@@ -24,6 +35,7 @@ from .const import (
     CONF_CONTRACT_NUMBER,
     CONF_CUSTOMER_NUMBER,
     CONF_METER_NUMBER,
+    CONF_READING_SOURCE,
     DEFAULT_AUTO_DAYS,
     DEFAULT_AUTO_HOUR_END,
     DEFAULT_AUTO_HOUR_START,
@@ -51,6 +63,8 @@ class SubmitStatus(StrEnum):
     INVALID_READING = "invalid_reading"
     READING_DECREASED = "reading_decreased"
 
+
+SUCCESS = {SubmitStatus.OK, SubmitStatus.DRY_RUN_OK}
 
 # Statuses after which the same reading is not retried automatically.
 _NOT_RETRYABLE = {
@@ -105,17 +119,43 @@ class HSYSubmitManager:
 
     @callback
     def async_start(self) -> Callable[[], None]:
-        """Start the hourly automatic submission check."""
-        unsub_time = async_track_time_change(
-            self.hass, self._async_auto_tick, minute=0, second=0
-        )
-        unsub_coord = self.coordinator.async_add_listener(self._handle_coordinator)
+        """Start the hourly check and following the reading source."""
+        unsubs = [
+            async_track_time_change(
+                self.hass, self._async_auto_tick, minute=0, second=0
+            ),
+            self.coordinator.async_add_listener(self._handle_coordinator),
+        ]
+        if source := self.reading_source:
+            unsubs.append(
+                async_track_state_change_event(
+                    self.hass, [source], self._handle_source_event
+                )
+            )
+            self._update_from_source(self.hass.states.get(source))
 
         def _stop() -> None:
-            unsub_time()
-            unsub_coord()
+            for unsub in unsubs:
+                unsub()
 
         return _stop
+
+    @callback
+    def _handle_source_event(self, event: Event[EventStateChangedData]) -> None:
+        self._update_from_source(event.data["new_state"])
+
+    @callback
+    def _update_from_source(self, state: State | None) -> None:
+        """Copy the source entity's reading, as an integer, to the input."""
+        if state is None or state.state in (STATE_UNKNOWN, STATE_UNAVAILABLE):
+            return
+        try:
+            value = int(float(state.state.replace(",", ".")))
+        except ValueError:
+            return
+        if value > 0 and value != self.reading_input:
+            self.state["reading_input"] = value
+            self.hass.async_create_task(self._async_save())
 
     @callback
     def _handle_coordinator(self) -> None:
@@ -125,6 +165,11 @@ class HSYSubmitManager:
             self.hass.async_create_task(self._async_save())
 
     # ---- state accessors ------------------------------------------------
+
+    @property
+    def reading_source(self) -> str | None:
+        """Return the entity the reading is taken from, if any."""
+        return self.entry.options.get(CONF_READING_SOURCE) or None
 
     @property
     def reading_input(self) -> int:

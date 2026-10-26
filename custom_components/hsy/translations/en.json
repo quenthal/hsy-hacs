@@ -50,10 +50,12 @@
           "auto_submit": "Submit the meter reading automatically every month",
           "auto_submit_days": "Days of month for automatic submission",
           "auto_submit_hour_start": "Earliest hour",
-          "auto_submit_hour_end": "Latest hour (exclusive)"
+          "auto_submit_hour_end": "Latest hour (exclusive)",
+          "reading_source": "Reading source entity"
         },
         "data_description": {
-          "auto_submit": "Submits the value of the \"Meter reading to submit\" entity once a month, checked every hour within the window. Requires submission settings."
+          "auto_submit": "Submits the value of the \"Meter reading to submit\" entity once a month, checked every hour within the window. Requires submission settings.",
+          "reading_source": "Optional. The reading to submit follows this entity (e.g. a camera-read meter sensor), rounded down to an integer. Manual input is then disabled."
         }
       }
     },
@@ -64,20 +66,48 @@
   },
   "entity": {
     "sensor": {
-      "meter_reading": { "name": "Meter reading" },
-      "meter_read_on": { "name": "Meter read" },
-      "meter_installed_on": { "name": "Meter installed" },
-      "last_reported_reading": { "name": "Last reported reading" },
-      "water_usage": { "name": "Water usage this year" },
-      "water_costs": { "name": "Water costs this year" },
-      "waste_collected": { "name": "Waste collected this year" },
-      "waste_costs": { "name": "Waste costs this year" },
-      "data_updated": { "name": "Data updated" },
-      "next_collection": { "name": "{fraction} next collection" },
-      "fraction_collected": { "name": "{fraction} collected this year" },
-      "fraction_costs": { "name": "{fraction} costs this year" },
-      "last_submitted": { "name": "Reading submitted" },
-      "auto_last_attempt": { "name": "Automatic submission last attempt" },
+      "meter_reading": {
+        "name": "Meter reading"
+      },
+      "meter_read_on": {
+        "name": "Meter read"
+      },
+      "meter_installed_on": {
+        "name": "Meter installed"
+      },
+      "last_reported_reading": {
+        "name": "Last reported reading"
+      },
+      "water_usage": {
+        "name": "Water usage this year"
+      },
+      "water_costs": {
+        "name": "Water costs this year"
+      },
+      "waste_collected": {
+        "name": "Waste collected this year"
+      },
+      "waste_costs": {
+        "name": "Waste costs this year"
+      },
+      "data_updated": {
+        "name": "Data updated"
+      },
+      "next_collection": {
+        "name": "{fraction} next collection"
+      },
+      "fraction_collected": {
+        "name": "{fraction} collected this year"
+      },
+      "fraction_costs": {
+        "name": "{fraction} costs this year"
+      },
+      "last_submitted": {
+        "name": "Reading submitted"
+      },
+      "auto_last_attempt": {
+        "name": "Automatic submission last attempt"
+      },
       "last_submit_result": {
         "name": "Submission result",
         "state": {
@@ -91,10 +121,68 @@
       }
     },
     "binary_sensor": {
-      "reported_this_month": { "name": "Reading submitted this month" }
+      "reported_this_month": {
+        "name": "Reading submitted this month"
+      }
     },
     "number": {
-      "reading_input": { "name": "Meter reading to submit" }
+      "reading_input": {
+        "name": "Meter reading to submit"
+      }
+    },
+    "button": {
+      "submit": {
+        "name": "Submit reading to HSY"
+      },
+      "submit_dry_run": {
+        "name": "Submit reading (dry run)"
+      }
+    }
+  },
+  "services": {
+    "submit_reading": {
+      "name": "Submit meter reading",
+      "description": "Submits the water meter reading to HSY.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Integration entry",
+          "description": "The HSY entry to use."
+        },
+        "reading": {
+          "name": "Reading",
+          "description": "Reading in m³. Defaults to the \"Meter reading to submit\" value."
+        },
+        "dry_run": {
+          "name": "Dry run",
+          "description": "Validate with HSY without storing the reading."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "reading_from_source": {
+      "message": "The reading follows {entity_id}. Remove the reading source in the options to enter it manually."
+    },
+    "entry_not_found": {
+      "message": "HSY entry not found."
+    },
+    "entry_not_loaded": {
+      "message": "The HSY entry is not loaded."
+    },
+    "submit_not_configured": {
+      "message": "Meter reading submission is not configured for this entry."
+    },
+    "submit_rejected": {
+      "message": "HSY refused the reading: {message}"
+    },
+    "submit_failed": {
+      "message": "Submitting the reading failed: {message}"
+    },
+    "submit_invalid_reading": {
+      "message": "No reading to submit."
+    },
+    "submit_reading_decreased": {
+      "message": "The reading is lower than the previous one ({message})."
     }
   }
 }

@@ -50,10 +50,12 @@
           "auto_submit": "Lähetä lukema automaattisesti kerran kuussa",
           "auto_submit_days": "Automaattilähetyksen päivät",
           "auto_submit_hour_start": "Aikaisin tunti",
-          "auto_submit_hour_end": "Myöhäisin tunti (ei mukana)"
+          "auto_submit_hour_end": "Myöhäisin tunti (ei mukana)",
+          "reading_source": "Lukeman lähde-entiteetti"
         },
         "data_description": {
-          "auto_submit": "Lähettää \"Lähetettävä lukema\" -entiteetin arvon kerran kuussa; tarkistus tunnin välein aikaikkunassa. Vaatii lähetysasetukset."
+          "auto_submit": "Lähettää \"Lähetettävä lukema\" -entiteetin arvon kerran kuussa; tarkistus tunnin välein aikaikkunassa. Vaatii lähetysasetukset.",
+          "reading_source": "Valinnainen. Lähetettävä lukema seuraa tätä entiteettiä (esim. kameralla luettu mittarisensori) alaspäin kokonaisluvuksi pyöristettynä. Käsin syöttö on silloin pois käytöstä."
         }
       }
     },
@@ -64,20 +66,48 @@
   },
   "entity": {
     "sensor": {
-      "meter_reading": { "name": "Vesimittarin lukema" },
-      "meter_read_on": { "name": "Mittari luettu" },
-      "meter_installed_on": { "name": "Mittari asennettu" },
-      "last_reported_reading": { "name": "Viimeksi ilmoitettu lukema" },
-      "water_usage": { "name": "Vedenkulutus tänä vuonna" },
-      "water_costs": { "name": "Vesikustannukset tänä vuonna" },
-      "waste_collected": { "name": "Jätettä kerätty tänä vuonna" },
-      "waste_costs": { "name": "Jätekustannukset tänä vuonna" },
-      "data_updated": { "name": "Tiedot päivitetty" },
-      "next_collection": { "name": "{fraction} seuraava nouto" },
-      "fraction_collected": { "name": "{fraction} kerätty tänä vuonna" },
-      "fraction_costs": { "name": "{fraction} kustannukset tänä vuonna" },
-      "last_submitted": { "name": "Lukema lähetetty" },
-      "auto_last_attempt": { "name": "Automaatti yritti viimeksi" },
+      "meter_reading": {
+        "name": "Vesimittarin lukema"
+      },
+      "meter_read_on": {
+        "name": "Mittari luettu"
+      },
+      "meter_installed_on": {
+        "name": "Mittari asennettu"
+      },
+      "last_reported_reading": {
+        "name": "Viimeksi ilmoitettu lukema"
+      },
+      "water_usage": {
+        "name": "Vedenkulutus tänä vuonna"
+      },
+      "water_costs": {
+        "name": "Vesikustannukset tänä vuonna"
+      },
+      "waste_collected": {
+        "name": "Jätettä kerätty tänä vuonna"
+      },
+      "waste_costs": {
+        "name": "Jätekustannukset tänä vuonna"
+      },
+      "data_updated": {
+        "name": "Tiedot päivitetty"
+      },
+      "next_collection": {
+        "name": "{fraction} seuraava nouto"
+      },
+      "fraction_collected": {
+        "name": "{fraction} kerätty tänä vuonna"
+      },
+      "fraction_costs": {
+        "name": "{fraction} kustannukset tänä vuonna"
+      },
+      "last_submitted": {
+        "name": "Lukema lähetetty"
+      },
+      "auto_last_attempt": {
+        "name": "Automaatti yritti viimeksi"
+      },
       "last_submit_result": {
         "name": "Lähetyksen tulos",
         "state": {
@@ -91,10 +121,68 @@
       }
     },
     "binary_sensor": {
-      "reported_this_month": { "name": "Lukema ilmoitettu tässä kuussa" }
+      "reported_this_month": {
+        "name": "Lukema ilmoitettu tässä kuussa"
+      }
     },
     "number": {
-      "reading_input": { "name": "Lähetettävä lukema" }
+      "reading_input": {
+        "name": "Lähetettävä lukema"
+      }
+    },
+    "button": {
+      "submit": {
+        "name": "Lähetä lukema HSY:lle"
+      },
+      "submit_dry_run": {
+        "name": "Lähetä lukema (kuivaharjoitus)"
+      }
+    }
+  },
+  "services": {
+    "submit_reading": {
+      "name": "Lähetä mittarilukema",
+      "description": "Lähettää vesimittarin lukeman HSY:lle.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Integraatio",
+          "description": "Käytettävä HSY-integraatio."
+        },
+        "reading": {
+          "name": "Lukema",
+          "description": "Lukema m³. Oletuksena \"Lähetettävä lukema\" -arvo."
+        },
+        "dry_run": {
+          "name": "Kuivaharjoitus",
+          "description": "Tarkistuta HSY:llä tallentamatta lukemaa."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "reading_from_source": {
+      "message": "Lukema seuraa entiteettiä {entity_id}. Poista lukeman lähde asetuksista syöttääksesi lukeman käsin."
+    },
+    "entry_not_found": {
+      "message": "HSY-integraatiota ei löytynyt."
+    },
+    "entry_not_loaded": {
+      "message": "HSY-integraatio ei ole käynnissä."
+    },
+    "submit_not_configured": {
+      "message": "Lukeman lähetystä ei ole määritetty tälle integraatiolle."
+    },
+    "submit_rejected": {
+      "message": "HSY hylkäsi lukeman: {message}"
+    },
+    "submit_failed": {
+      "message": "Lukeman lähetys epäonnistui: {message}"
+    },
+    "submit_invalid_reading": {
+      "message": "Lähetettävää lukemaa ei ole."
+    },
+    "submit_reading_decreased": {
+      "message": "Lukema on pienempi kuin edellinen ({message})."
     }
   }
 }
