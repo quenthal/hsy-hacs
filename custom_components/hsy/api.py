@@ -51,6 +51,8 @@ class WasteFraction:
     container_size: str | None = None
     collected: float | None = None
     costs: float | None = None
+    collected_history: dict[str, float | None] = field(default_factory=dict)
+    costs_history: dict[str, float | None] = field(default_factory=dict)
 
 
 @dataclass
@@ -142,6 +144,13 @@ def _history(dataset: dict[str, Any]) -> dict[str, float | None]:
     }
 
 
+def _group_value(row: dict[str, Any], label: str) -> float:
+    group = next(
+        (g for g in row.get("dataGroups") or [] if g.get("label") == label), None
+    )
+    return (to_number(group.get("totalValue")) or 0.0) if group else 0.0
+
+
 def _latest(dataset: dict[str, Any] | None) -> dict[str, Any] | None:
     if not dataset or not dataset.get("data"):
         return None
@@ -229,13 +238,17 @@ def parse_report(
             to_number(latest.get("totalValue")) if latest else None,
         )
         setattr(data, f"waste_{attr}_history", _history(dataset))
-        groups = (latest or {}).get("dataGroups") or []
         for fraction in data.fractions.values():
-            group = next((g for g in groups if g.get("label") == fraction.name), None)
+            setattr(
+                fraction, attr, _group_value(latest, fraction.name) if latest else 0.0
+            )
             setattr(
                 fraction,
-                attr,
-                to_number(group.get("totalValue")) if group else 0.0,
+                f"{attr}_history",
+                {
+                    str(row.get("dataset")): _group_value(row, fraction.name)
+                    for row in dataset.get("data") or []
+                },
             )
 
     data.updated_at = parse_created(

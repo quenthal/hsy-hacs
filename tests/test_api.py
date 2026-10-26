@@ -46,6 +46,8 @@ def test_parse_report() -> None:
     assert bio.container_size == "140 l"
     assert bio.collected == 100
     assert bio.costs == 75
+    assert bio.collected_history == {"2025": 120, "2026": 100}
+    assert data.fractions["mixed"].costs_history == {"2025": 260, "2026": 210}
     assert data.updated_at is not None
     assert data.updated_at.isoformat() == "2026-10-20T06:15:00+03:00"
 
@@ -63,6 +65,7 @@ def test_missing_fraction_in_statistics() -> None:
         row["dataGroups"] = row["dataGroups"][:1]
     data = _report(waste_collected=collected)
     assert data.fractions["bio"].collected == 0
+    assert data.fractions["bio"].collected_history == {"2025": 0, "2026": 0}
     assert data.fractions["mixed"].collected == 250
 
 

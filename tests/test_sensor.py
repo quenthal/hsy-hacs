@@ -46,6 +46,7 @@ async def test_report_sensors(
     )  # EET, 12:00 local
     assert state("bio_next_collection").attributes["interval"] == "joka 2. vko"
     assert state("mixed_collected").state == "250.0"
+    assert state("bio_costs").attributes["history"] == {"2025": 90, "2026": 75}
     assert state("meter_read_on").state == "2026-10-01T09:00:00+00:00"
 
     registry = er.async_get(hass)

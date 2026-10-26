@@ -10,5 +10,5 @@
   "issue_tracker": "https://github.com/quenthal/hsy-hacs/issues",
   "loggers": ["custom_components.hsy"],
   "requirements": [],
-  "version": "2026.10.2"
+  "version": "2026.10.3"
 }

@@ -141,6 +141,7 @@ FRACTION_SENSORS: tuple[HSYFractionSensorDescription, ...] = (
         device_class=SensorDeviceClass.WEIGHT,
         native_unit_of_measurement=UnitOfMass.KILOGRAMS,
         value_fn=lambda f: f.collected,
+        attrs_fn=lambda f: {"history": f.collected_history},
     ),
     HSYFractionSensorDescription(
         key="costs",
@@ -148,6 +149,7 @@ FRACTION_SENSORS: tuple[HSYFractionSensorDescription, ...] = (
         device_class=SensorDeviceClass.MONETARY,
         native_unit_of_measurement=CURRENCY_EURO,
         value_fn=lambda f: f.costs,
+        attrs_fn=lambda f: {"history": f.costs_history},
     ),
 )
 
@@ -206,6 +208,7 @@ class HSYFractionSensor(HSYEntity, SensorEntity):
     """Sensor of one waste fraction."""
 
     entity_description: HSYFractionSensorDescription
+    _unrecorded_attributes = _UNRECORDED
 
     def __init__(
         self,
