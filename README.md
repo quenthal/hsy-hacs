@@ -70,6 +70,11 @@ lukema syötetään *Lähetettävä lukema* -entiteettiin.
 Asennus HACS:n custom repositoryna, minkä jälkeen *Asetukset → Laitteet ja
 palvelut → Lisää integraatio → HSY*.
 
+## Versioning
+
+Releases are named `YYYY.MM.N`: year, month and the number of the release
+within that month (e.g. `2026.10.1`).
+
 ## License
 
 MIT, see [LICENSE](LICENSE). The license covers the code only, not the HSY name or logo.
