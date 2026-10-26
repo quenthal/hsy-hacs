@@ -1,3 +1,5 @@
+<img src="custom_components/hsy/brand/icon.png" alt="HSY" width="96" align="right">
+
 # HSY for Home Assistant
 
 Custom integration for [HSY](https://www.hsy.fi/) (Helsinki Region Environmental
@@ -60,4 +62,5 @@ palvelut → Lisää integraatio → HSY*.
 
 ## Disclaimer
 
-This is an unofficial integration and is not affiliated with HSY.
+This is an unofficial integration and is not affiliated with or endorsed by HSY.
+The HSY name and logo are trademarks of HSY and are used only to identify the service.

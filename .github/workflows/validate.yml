@@ -20,5 +20,5 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
-          # The brand icon is submitted to home-assistant/brands separately.
+          # Brand images are bundled in custom_components/hsy/brand (HA 2026.x).
           ignore: brands
