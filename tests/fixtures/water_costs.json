@@ -1,0 +1,54 @@
+{
+ "queryParameters": {
+  "created": "2026-10-20 06:15:00 +0300",
+  "customerNumber": "0",
+  "type": "WATER_COSTS"
+ },
+ "messages": [],
+ "datas": [
+  {
+   "title": "Vuosittaiset vesikustannukset (alv 0%)",
+   "labels": [
+    "2025",
+    "2026"
+   ],
+   "data": [
+    {
+     "dataset": "2025",
+     "dataGroups": [
+      {
+       "label": "Vuosittainen",
+       "values": [
+        {
+         "label": null,
+         "value": "410,50"
+        }
+       ],
+       "totalValue": "410,50",
+       "type": "WATER_COSTS_PER_YEAR"
+      }
+     ],
+     "totalValue": "410,50"
+    },
+    {
+     "dataset": "2026",
+     "dataGroups": [
+      {
+       "label": "Vuosittainen",
+       "values": [
+        {
+         "label": null,
+         "value": "352"
+        }
+       ],
+       "totalValue": "352",
+       "type": "WATER_COSTS_PER_YEAR"
+      }
+     ],
+     "totalValue": "352"
+    }
+   ],
+   "type": "WATER_COSTS"
+  }
+ ]
+}

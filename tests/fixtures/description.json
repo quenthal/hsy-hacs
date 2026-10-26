@@ -1,0 +1,52 @@
+{
+ "queryParameters": {
+  "created": "2026-10-20 06:15:00 +0300",
+  "customerNumber": "0",
+  "type": "CUSTOMER_DETAILS"
+ },
+ "messages": [],
+ "wasteCustomerDetails": {
+  "serviceNumber": "XX000000001",
+  "address": "Esimerkkitie 1, 00100",
+  "collectionPoints": [
+   {
+    "name": "1",
+    "containers": [
+     {
+      "collectionInterval": "joka 8. vko",
+      "wasteType": "Sekajäte",
+      "containerSize": "240 l",
+      "containerCount": "1",
+      "nextCollectionDate": "05.11.26",
+      "containerType": "astia",
+      "containerOwner": "asiakas"
+     },
+     {
+      "collectionInterval": "joka 2. vko",
+      "wasteType": "Biojäte",
+      "containerSize": "140 l",
+      "containerCount": "1",
+      "nextCollectionDate": "30.10.26",
+      "containerType": "astia",
+      "containerOwner": "asiakas"
+     }
+    ]
+   }
+  ]
+ },
+ "waterCustomerDetails": {
+  "customerNumber": "1000001",
+  "usageLocationNumber": "2000002",
+  "waterContractNumber": "300000003",
+  "address": "Esimerkkitie 1, 00100",
+  "waterMeters": [
+   {
+    "meternumber": "40000004",
+    "lastReading": "1234 m³",
+    "lastReadingDate": "01.10.2026",
+    "installDate": "15.03.2019",
+    "model": "20"
+   }
+  ]
+ }
+}

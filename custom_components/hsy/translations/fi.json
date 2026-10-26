@@ -1,0 +1,100 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HSY eRaportti",
+        "description": "Anna HSY:n eRaportissa näkyvät palvelunumerot.",
+        "data": {
+          "water_service_number": "Veden palvelunumero",
+          "waste_service_number": "Jätehuollon palvelunumero"
+        }
+      },
+      "submit": {
+        "title": "Lukeman lähetys (valinnainen)",
+        "description": "Täytä kaikki kentät, jos haluat lähettää vesimittarin lukeman HSY:lle, tai jätä kaikki tyhjiksi. Asiakas-, sopimus- ja mittarinumero on haettu eRaportista.",
+        "data": {
+          "api_key": "API-avain",
+          "customer_number": "Asiakasnumero",
+          "contract_number": "Sopimusnumero",
+          "meter_number": "Mittarinumero"
+        }
+      },
+      "reconfigure": {
+        "title": "Lukeman lähetys",
+        "description": "Täytä kaikki kentät ottaaksesi lähetyksen käyttöön tai tyhjennä kaikki poistaaksesi sen.",
+        "data": {
+          "api_key": "API-avain",
+          "customer_number": "Asiakasnumero",
+          "contract_number": "Sopimusnumero",
+          "meter_number": "Mittarinumero"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Yhteys HSY:hyn epäonnistui.",
+      "invalid_service_numbers": "eRaportti ei palauttanut vesimittaria eikä jäteastioita näillä palvelunumeroilla.",
+      "incomplete_submit": "Täytä kaikki lähetyksen kentät tai jätä kaikki tyhjiksi.",
+      "unknown": "HSY palautti odottamattoman vastauksen."
+    },
+    "abort": {
+      "already_configured": "Nämä palvelunumerot on jo lisätty.",
+      "reconfigure_successful": "Asetukset päivitetty."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HSY-asetukset",
+        "data": {
+          "update_interval_hours": "Päivitysväli",
+          "auto_submit": "Lähetä lukema automaattisesti kerran kuussa",
+          "auto_submit_days": "Automaattilähetyksen päivät",
+          "auto_submit_hour_start": "Aikaisin tunti",
+          "auto_submit_hour_end": "Myöhäisin tunti (ei mukana)"
+        },
+        "data_description": {
+          "auto_submit": "Lähettää \"Lähetettävä lukema\" -entiteetin arvon kerran kuussa; tarkistus tunnin välein aikaikkunassa. Vaatii lähetysasetukset."
+        }
+      }
+    },
+    "error": {
+      "invalid_hours": "Aikaisimman tunnin pitää olla ennen myöhäisintä.",
+      "no_days": "Valitse vähintään yksi päivä."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "meter_reading": { "name": "Vesimittarin lukema" },
+      "meter_read_on": { "name": "Mittari luettu" },
+      "meter_installed_on": { "name": "Mittari asennettu" },
+      "last_reported_reading": { "name": "Viimeksi ilmoitettu lukema" },
+      "water_usage": { "name": "Vedenkulutus tänä vuonna" },
+      "water_costs": { "name": "Vesikustannukset tänä vuonna" },
+      "waste_collected": { "name": "Jätettä kerätty tänä vuonna" },
+      "waste_costs": { "name": "Jätekustannukset tänä vuonna" },
+      "data_updated": { "name": "Tiedot päivitetty" },
+      "next_collection": { "name": "{fraction} seuraava nouto" },
+      "fraction_collected": { "name": "{fraction} kerätty tänä vuonna" },
+      "fraction_costs": { "name": "{fraction} kustannukset tänä vuonna" },
+      "last_submitted": { "name": "Lukema lähetetty" },
+      "auto_last_attempt": { "name": "Automaatti yritti viimeksi" },
+      "last_submit_result": {
+        "name": "Lähetyksen tulos",
+        "state": {
+          "ok": "OK",
+          "dry_run_ok": "OK (kuivaharjoitus)",
+          "rejected": "HSY hylkäsi",
+          "failed": "Epäonnistui",
+          "invalid_reading": "Lukema puuttuu",
+          "reading_decreased": "Lukema pienempi kuin edellinen"
+        }
+      }
+    },
+    "binary_sensor": {
+      "reported_this_month": { "name": "Lukema ilmoitettu tässä kuussa" }
+    },
+    "number": {
+      "reading_input": { "name": "Lähetettävä lukema" }
+    }
+  }
+}

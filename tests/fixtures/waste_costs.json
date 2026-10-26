@@ -1,0 +1,76 @@
+{
+ "queryParameters": {
+  "created": "2026-10-20 06:15:00 +0300",
+  "customerNumber": "0",
+  "type": "WASTE_COSTS"
+ },
+ "messages": [],
+ "datas": [
+  {
+   "title": "x",
+   "labels": [
+    "2025",
+    "2026"
+   ],
+   "data": [
+    {
+     "dataset": "2025",
+     "dataGroups": [
+      {
+       "label": "Sekajäte",
+       "values": [
+        {
+         "label": "240 l",
+         "value": "260"
+        }
+       ],
+       "totalValue": "260",
+       "type": "WASTE_CATEGORY"
+      },
+      {
+       "label": "Biojäte",
+       "values": [
+        {
+         "label": "140 l",
+         "value": "90"
+        }
+       ],
+       "totalValue": "90",
+       "type": "WASTE_CATEGORY"
+      }
+     ],
+     "totalValue": "350"
+    },
+    {
+     "dataset": "2026",
+     "dataGroups": [
+      {
+       "label": "Sekajäte",
+       "values": [
+        {
+         "label": "240 l",
+         "value": "210"
+        }
+       ],
+       "totalValue": "210",
+       "type": "WASTE_CATEGORY"
+      },
+      {
+       "label": "Biojäte",
+       "values": [
+        {
+         "label": "140 l",
+         "value": "75"
+        }
+       ],
+       "totalValue": "75",
+       "type": "WASTE_CATEGORY"
+      }
+     ],
+     "totalValue": "285"
+    }
+   ],
+   "type": "WASTE_MAIN_CATEGORIES"
+  }
+ ]
+}

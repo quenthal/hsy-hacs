@@ -1,0 +1,100 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HSY eRaportti",
+        "description": "Enter the service numbers shown in HSY eRaportti.",
+        "data": {
+          "water_service_number": "Water service number",
+          "waste_service_number": "Waste service number"
+        }
+      },
+      "submit": {
+        "title": "Meter reading submission (optional)",
+        "description": "Fill in all fields to enable submitting the water meter reading to HSY, or leave all empty to skip. Customer, contract and meter numbers are prefilled from eRaportti.",
+        "data": {
+          "api_key": "API key",
+          "customer_number": "Customer number",
+          "contract_number": "Contract number",
+          "meter_number": "Meter number"
+        }
+      },
+      "reconfigure": {
+        "title": "Meter reading submission",
+        "description": "Fill in all fields to enable submission, or clear all to disable it.",
+        "data": {
+          "api_key": "API key",
+          "customer_number": "Customer number",
+          "contract_number": "Contract number",
+          "meter_number": "Meter number"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to HSY.",
+      "invalid_service_numbers": "eRaportti returned no water meter or waste containers for these service numbers.",
+      "incomplete_submit": "Fill in all submission fields or leave all of them empty.",
+      "unknown": "Unexpected response from HSY."
+    },
+    "abort": {
+      "already_configured": "These service numbers are already configured.",
+      "reconfigure_successful": "Settings updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HSY options",
+        "data": {
+          "update_interval_hours": "Update interval",
+          "auto_submit": "Submit the meter reading automatically every month",
+          "auto_submit_days": "Days of month for automatic submission",
+          "auto_submit_hour_start": "Earliest hour",
+          "auto_submit_hour_end": "Latest hour (exclusive)"
+        },
+        "data_description": {
+          "auto_submit": "Submits the value of the \"Meter reading to submit\" entity once a month, checked every hour within the window. Requires submission settings."
+        }
+      }
+    },
+    "error": {
+      "invalid_hours": "The earliest hour must be before the latest hour.",
+      "no_days": "Select at least one day."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "meter_reading": { "name": "Meter reading" },
+      "meter_read_on": { "name": "Meter read" },
+      "meter_installed_on": { "name": "Meter installed" },
+      "last_reported_reading": { "name": "Last reported reading" },
+      "water_usage": { "name": "Water usage this year" },
+      "water_costs": { "name": "Water costs this year" },
+      "waste_collected": { "name": "Waste collected this year" },
+      "waste_costs": { "name": "Waste costs this year" },
+      "data_updated": { "name": "Data updated" },
+      "next_collection": { "name": "{fraction} next collection" },
+      "fraction_collected": { "name": "{fraction} collected this year" },
+      "fraction_costs": { "name": "{fraction} costs this year" },
+      "last_submitted": { "name": "Reading submitted" },
+      "auto_last_attempt": { "name": "Automatic submission last attempt" },
+      "last_submit_result": {
+        "name": "Submission result",
+        "state": {
+          "ok": "OK",
+          "dry_run_ok": "OK (dry run)",
+          "rejected": "Rejected by HSY",
+          "failed": "Failed",
+          "invalid_reading": "Reading missing",
+          "reading_decreased": "Reading lower than previous"
+        }
+      }
+    },
+    "binary_sensor": {
+      "reported_this_month": { "name": "Reading submitted this month" }
+    },
+    "number": {
+      "reading_input": { "name": "Meter reading to submit" }
+    }
+  }
+}

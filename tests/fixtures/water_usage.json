@@ -1,0 +1,97 @@
+{
+ "queryParameters": {
+  "created": "2026-10-20 06:15:00 +0300",
+  "customerNumber": "0",
+  "type": "WATER_USAGE"
+ },
+ "messages": [],
+ "datas": [
+  {
+   "title": "Vedenkulutus vuosittain (*=arvio)",
+   "labels": [
+    "2025",
+    "2026*"
+   ],
+   "data": [
+    {
+     "dataset": "2025",
+     "dataGroups": [
+      {
+       "label": "Vuosikulutus",
+       "values": [
+        {
+         "label": null,
+         "value": "95"
+        }
+       ],
+       "totalValue": "95",
+       "type": "WATER_USAGE_PER_YEAR"
+      }
+     ],
+     "totalValue": "95"
+    },
+    {
+     "dataset": "2026*",
+     "dataGroups": [
+      {
+       "label": "Vuosikulutus",
+       "values": [
+        {
+         "label": null,
+         "value": "80"
+        }
+       ],
+       "totalValue": "80",
+       "type": "WATER_USAGE_PER_YEAR"
+      }
+     ],
+     "totalValue": "80"
+    }
+   ],
+   "type": "WATER_METER_USAGE"
+  },
+  {
+   "title": "Mittarilukema ja vuosikulutus (*=arvio)",
+   "labels": [],
+   "data": [
+    {
+     "dataset": "40000004",
+     "dataGroups": [
+      {
+       "label": "Ilmoitettu lukema",
+       "values": [
+        {
+         "label": "2026-08-01",
+         "value": "1190"
+        },
+        {
+         "label": "2026-09-01",
+         "value": "1212"
+        },
+        {
+         "label": "2026-10-01",
+         "value": "1234"
+        }
+       ],
+       "totalValue": "1234",
+       "type": "WATER_USAGE_READINGS"
+      },
+      {
+       "label": "Lukemahetken vuosikulutus",
+       "values": [
+        {
+         "label": "2026-10-01",
+         "value": "96"
+        }
+       ],
+       "totalValue": "96",
+       "type": "WATER_USAGE_CALCULATED"
+      }
+     ],
+     "totalValue": "1234"
+    }
+   ],
+   "type": "WATER_METER_READINGS"
+  }
+ ]
+}
